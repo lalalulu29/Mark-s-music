@@ -7,9 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED6AE642262B59330032BACC /* MyMusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6AE641262B59330032BACC /* MyMusicTableViewCell.swift */; };
+		ED870D9E26231EAF008C24AF /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED870D9D26231EAE008C24AF /* AuthViewController.swift */; };
+		ED870DA426232F31008C24AF /* authInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED870DA326232F31008C24AF /* authInApp.swift */; };
+		ED870DA826234731008C24AF /* decodeRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED870DA726234731008C24AF /* decodeRequests.swift */; };
+		ED870DAD262347B2008C24AF /* authResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED870DAC262347B2008C24AF /* authResponse.swift */; };
+		ED870DB6262359FF008C24AF /* saveInfoInUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED870DB5262359FF008C24AF /* saveInfoInUserDefaults.swift */; };
+		ED870DBD262365D3008C24AF /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED870DBC262365D3008C24AF /* RootViewController.swift */; };
+		ED870DC026237061008C24AF /* tokenCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED870DBF26237061008C24AF /* tokenCheck.swift */; };
 		EDFDDC332623067F006869FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFDDC322623067F006869FE /* AppDelegate.swift */; };
 		EDFDDC352623067F006869FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFDDC342623067F006869FE /* SceneDelegate.swift */; };
-		EDFDDC372623067F006869FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFDDC362623067F006869FE /* ViewController.swift */; };
 		EDFDDC3A2623067F006869FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDFDDC382623067F006869FE /* Main.storyboard */; };
 		EDFDDC3D2623067F006869FE /* Mark_s_music.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EDFDDC3B2623067F006869FE /* Mark_s_music.xcdatamodeld */; };
 		EDFDDC3F26230682006869FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDFDDC3E26230682006869FE /* Assets.xcassets */; };
@@ -17,10 +24,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ED6AE641262B59330032BACC /* MyMusicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMusicTableViewCell.swift; sourceTree = "<group>"; };
+		ED870D9D26231EAE008C24AF /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		ED870DA326232F31008C24AF /* authInApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authInApp.swift; sourceTree = "<group>"; };
+		ED870DA726234731008C24AF /* decodeRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = decodeRequests.swift; sourceTree = "<group>"; };
+		ED870DAC262347B2008C24AF /* authResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authResponse.swift; sourceTree = "<group>"; };
+		ED870DB5262359FF008C24AF /* saveInfoInUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = saveInfoInUserDefaults.swift; sourceTree = "<group>"; };
+		ED870DBC262365D3008C24AF /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		ED870DBF26237061008C24AF /* tokenCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tokenCheck.swift; sourceTree = "<group>"; };
 		EDFDDC2F2623067F006869FE /* Mark's music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mark's music.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFDDC322623067F006869FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDFDDC342623067F006869FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EDFDDC362623067F006869FE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EDFDDC392623067F006869FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EDFDDC3C2623067F006869FE /* Mark_s_music.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mark_s_music.xcdatamodel; sourceTree = "<group>"; };
 		EDFDDC3E26230682006869FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -39,6 +53,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED870D9C26231E59008C24AF /* viewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				ED870D9D26231EAE008C24AF /* AuthViewController.swift */,
+				ED870DBC262365D3008C24AF /* RootViewController.swift */,
+				ED6AE641262B59330032BACC /* MyMusicTableViewCell.swift */,
+			);
+			path = viewControllers;
+			sourceTree = "<group>";
+		};
+		ED870DA226232EFD008C24AF /* network */ = {
+			isa = PBXGroup;
+			children = (
+				ED870DA326232F31008C24AF /* authInApp.swift */,
+			);
+			path = network;
+			sourceTree = "<group>";
+		};
+		ED870DA62623470B008C24AF /* decode */ = {
+			isa = PBXGroup;
+			children = (
+				ED870DA726234731008C24AF /* decodeRequests.swift */,
+			);
+			path = decode;
+			sourceTree = "<group>";
+		};
+		ED870DAB26234762008C24AF /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				ED870DAC262347B2008C24AF /* authResponse.swift */,
+				ED870DBF26237061008C24AF /* tokenCheck.swift */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
+		ED870DB4262359EB008C24AF /* userDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				ED870DB5262359FF008C24AF /* saveInfoInUserDefaults.swift */,
+			);
+			path = userDefaults;
+			sourceTree = "<group>";
+		};
 		EDFDDC262623067F006869FE = {
 			isa = PBXGroup;
 			children = (
@@ -60,7 +117,11 @@
 			children = (
 				EDFDDC322623067F006869FE /* AppDelegate.swift */,
 				EDFDDC342623067F006869FE /* SceneDelegate.swift */,
-				EDFDDC362623067F006869FE /* ViewController.swift */,
+				ED870DB4262359EB008C24AF /* userDefaults */,
+				ED870DAB26234762008C24AF /* Structs */,
+				ED870DA62623470B008C24AF /* decode */,
+				ED870DA226232EFD008C24AF /* network */,
+				ED870D9C26231E59008C24AF /* viewControllers */,
 				EDFDDC382623067F006869FE /* Main.storyboard */,
 				EDFDDC3E26230682006869FE /* Assets.xcassets */,
 				EDFDDC4026230682006869FE /* LaunchScreen.storyboard */,
@@ -140,9 +201,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDFDDC372623067F006869FE /* ViewController.swift in Sources */,
 				EDFDDC332623067F006869FE /* AppDelegate.swift in Sources */,
+				ED870D9E26231EAF008C24AF /* AuthViewController.swift in Sources */,
+				ED870DBD262365D3008C24AF /* RootViewController.swift in Sources */,
 				EDFDDC3D2623067F006869FE /* Mark_s_music.xcdatamodeld in Sources */,
+				ED870DA426232F31008C24AF /* authInApp.swift in Sources */,
+				ED870DA826234731008C24AF /* decodeRequests.swift in Sources */,
+				ED870DC026237061008C24AF /* tokenCheck.swift in Sources */,
+				ED6AE642262B59330032BACC /* MyMusicTableViewCell.swift in Sources */,
+				ED870DAD262347B2008C24AF /* authResponse.swift in Sources */,
+				ED870DB6262359FF008C24AF /* saveInfoInUserDefaults.swift in Sources */,
 				EDFDDC352623067F006869FE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,7 +368,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.kirill98.Mark-s-music";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -319,7 +387,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.kirill98.Mark-s-music";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

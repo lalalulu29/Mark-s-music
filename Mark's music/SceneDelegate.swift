@@ -16,6 +16,45 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        
+        var view: UIViewController!
+        if let token = UserDefaults.standard.string(forKey: "token"){
+            let network = AuthorizationInApp()
+            network.checkToken(token: token) { (data) in
+                let decode = DecodeRequests()
+                decode.decodeKeepAliveReq(data: data) { (tokenCheck) in
+                    DispatchQueue.main.sync {
+                        if tokenCheck.auth == "token_valid" {
+                            print("all ok")
+                            view = storyBoard.instantiateViewController(identifier: "mainView")
+                            self.window?.rootViewController = view
+                            self.window?.makeKeyAndVisible()
+                        } else {
+                            print("not all ok")
+                            view = storyBoard.instantiateViewController(identifier: "authOrReg")
+                            self.window?.rootViewController = view
+                            self.window?.makeKeyAndVisible()
+                        }
+                    }
+                    
+                }
+            }
+            
+        } else {
+            print("I'm firs time here")
+            view = storyBoard.instantiateViewController(identifier: "authOrReg")
+            self.window?.rootViewController = view
+            self.window?.makeKeyAndVisible()
+        }
+        
+        
+        
+        
+        
+        
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 
