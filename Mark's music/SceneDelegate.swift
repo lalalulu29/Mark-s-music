@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         var view: UIViewController!
         if let token = UserDefaults.standard.string(forKey: "token"){
-            let network = AuthorizationInApp()
+            let network = NetworkProvider()
             network.checkToken(token: token) { (data) in
                 let decode = DecodeRequests()
                 decode.decodeKeepAliveReq(data: data) { (tokenCheck) in
@@ -44,7 +44,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
             
         } else {
-            print("I'm firs time here")
+            print("I'm first time here")
             view = storyBoard.instantiateViewController(identifier: "authOrReg")
             self.window?.rootViewController = view
             self.window?.makeKeyAndVisible()

@@ -40,7 +40,7 @@ class AuthViewController: UIViewController {
     @IBAction func authButton(_ sender: UIButton) {
 
         
-        let netword = AuthorizationInApp()
+        let netword = NetworkProvider()
         guard let (userName, userPassword) = normalizeTextFieldContent() else {
             present(showAlert(title: "Ошибка", message: "Что-то пошло не так"),
                     animated: true,

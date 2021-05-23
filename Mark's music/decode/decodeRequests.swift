@@ -24,5 +24,16 @@ class DecodeRequests {
             
         }
     }
+    
+    func decodeTracksList(data: Data, response: @escaping (getMyTracks)->()) {
+        do {
+            let decodedData = try JSONDecoder().decode(getMyTracks.self, from: data)
+            response(decodedData)
+        } catch {
+            print("error with decoding")
+            print(error)
+        }
+        
+    }
 }
 

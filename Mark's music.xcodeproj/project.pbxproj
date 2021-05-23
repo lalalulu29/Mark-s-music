@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED0FC4C6262C69D10044A643 /* getMyTracks.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0FC4C5262C69D10044A643 /* getMyTracks.swift */; };
 		ED6AE642262B59330032BACC /* MyMusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6AE641262B59330032BACC /* MyMusicTableViewCell.swift */; };
 		ED870D9E26231EAF008C24AF /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED870D9D26231EAE008C24AF /* AuthViewController.swift */; };
 		ED870DA426232F31008C24AF /* authInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED870DA326232F31008C24AF /* authInApp.swift */; };
@@ -15,6 +16,8 @@
 		ED870DB6262359FF008C24AF /* saveInfoInUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED870DB5262359FF008C24AF /* saveInfoInUserDefaults.swift */; };
 		ED870DBD262365D3008C24AF /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED870DBC262365D3008C24AF /* RootViewController.swift */; };
 		ED870DC026237061008C24AF /* tokenCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED870DBF26237061008C24AF /* tokenCheck.swift */; };
+		ED9B6F2E26317DAD00516D73 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED9B6F2D26317DAD00516D73 /* AudioToolbox.framework */; };
+		EDE0D7412630D9D300C873E1 /* WorkWithAvfoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE0D7402630D9D300C873E1 /* WorkWithAvfoundation.swift */; };
 		EDFDDC332623067F006869FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFDDC322623067F006869FE /* AppDelegate.swift */; };
 		EDFDDC352623067F006869FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFDDC342623067F006869FE /* SceneDelegate.swift */; };
 		EDFDDC3A2623067F006869FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDFDDC382623067F006869FE /* Main.storyboard */; };
@@ -24,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ED0FC4C5262C69D10044A643 /* getMyTracks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getMyTracks.swift; sourceTree = "<group>"; };
 		ED6AE641262B59330032BACC /* MyMusicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMusicTableViewCell.swift; sourceTree = "<group>"; };
 		ED870D9D26231EAE008C24AF /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		ED870DA326232F31008C24AF /* authInApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authInApp.swift; sourceTree = "<group>"; };
@@ -32,6 +36,9 @@
 		ED870DB5262359FF008C24AF /* saveInfoInUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = saveInfoInUserDefaults.swift; sourceTree = "<group>"; };
 		ED870DBC262365D3008C24AF /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		ED870DBF26237061008C24AF /* tokenCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tokenCheck.swift; sourceTree = "<group>"; };
+		ED9B6F2B26317DAC00516D73 /* Mark's music.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Mark's music.entitlements"; sourceTree = "<group>"; };
+		ED9B6F2D26317DAD00516D73 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		EDE0D7402630D9D300C873E1 /* WorkWithAvfoundation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkWithAvfoundation.swift; sourceTree = "<group>"; };
 		EDFDDC2F2623067F006869FE /* Mark's music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mark's music.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFDDC322623067F006869FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDFDDC342623067F006869FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED9B6F2E26317DAD00516D73 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +92,7 @@
 			children = (
 				ED870DAC262347B2008C24AF /* authResponse.swift */,
 				ED870DBF26237061008C24AF /* tokenCheck.swift */,
+				ED0FC4C5262C69D10044A643 /* getMyTracks.swift */,
 			);
 			path = Structs;
 			sourceTree = "<group>";
@@ -96,11 +105,28 @@
 			path = userDefaults;
 			sourceTree = "<group>";
 		};
+		ED9B6F2C26317DAD00516D73 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ED9B6F2D26317DAD00516D73 /* AudioToolbox.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EDE0D73F2630D8AA00C873E1 /* avfoundation */ = {
+			isa = PBXGroup;
+			children = (
+				EDE0D7402630D9D300C873E1 /* WorkWithAvfoundation.swift */,
+			);
+			path = avfoundation;
+			sourceTree = "<group>";
+		};
 		EDFDDC262623067F006869FE = {
 			isa = PBXGroup;
 			children = (
 				EDFDDC312623067F006869FE /* Mark's music */,
 				EDFDDC302623067F006869FE /* Products */,
+				ED9B6F2C26317DAD00516D73 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -115,8 +141,10 @@
 		EDFDDC312623067F006869FE /* Mark's music */ = {
 			isa = PBXGroup;
 			children = (
+				ED9B6F2B26317DAC00516D73 /* Mark's music.entitlements */,
 				EDFDDC322623067F006869FE /* AppDelegate.swift */,
 				EDFDDC342623067F006869FE /* SceneDelegate.swift */,
+				EDE0D73F2630D8AA00C873E1 /* avfoundation */,
 				ED870DB4262359EB008C24AF /* userDefaults */,
 				ED870DAB26234762008C24AF /* Structs */,
 				ED870DA62623470B008C24AF /* decode */,
@@ -203,9 +231,11 @@
 			files = (
 				EDFDDC332623067F006869FE /* AppDelegate.swift in Sources */,
 				ED870D9E26231EAF008C24AF /* AuthViewController.swift in Sources */,
+				ED0FC4C6262C69D10044A643 /* getMyTracks.swift in Sources */,
 				ED870DBD262365D3008C24AF /* RootViewController.swift in Sources */,
 				EDFDDC3D2623067F006869FE /* Mark_s_music.xcdatamodeld in Sources */,
 				ED870DA426232F31008C24AF /* authInApp.swift in Sources */,
+				EDE0D7412630D9D300C873E1 /* WorkWithAvfoundation.swift in Sources */,
 				ED870DA826234731008C24AF /* decodeRequests.swift in Sources */,
 				ED870DC026237061008C24AF /* tokenCheck.swift in Sources */,
 				ED6AE642262B59330032BACC /* MyMusicTableViewCell.swift in Sources */,
@@ -358,6 +388,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Mark's music/Mark's music.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 395GS436QF;
 				INFOPLIST_FILE = "Mark's music/Info.plist";
@@ -377,6 +408,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Mark's music/Mark's music.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 395GS436QF;
 				INFOPLIST_FILE = "Mark's music/Info.plist";
