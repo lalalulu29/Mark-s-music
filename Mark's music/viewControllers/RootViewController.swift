@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import AVFoundation
+import AVKit
+import MediaPlayer
 
 class RootViewController: UIViewController {
     
@@ -20,19 +21,21 @@ class RootViewController: UIViewController {
     @IBOutlet weak var playAndPause: UIButton!
     
     
+    
     var mySongs = [tracks]()
-    
     let imageCache = NSCache<NSString, NSData>()
+    let network = NetworkProvider()
     
-    
+    var numberSongPlayNow = 0
     
     override func viewDidLoad() {
         
+       
         
         super.viewDidLoad()
         
-        let network = NetworkProvider()
-    
+        
+        
         
         guard let token = UserDefaults.standard.string(forKey: "token") else {return}
         network.getMyTracksList(token: token) { (data) in
@@ -65,11 +68,13 @@ class RootViewController: UIViewController {
                                                    bottom: CGFloat(infoMusicView.frame.height),
                                                    right: 0)
         
+        setupMediaPlayer()
+        
     }
     
     
-
-
+    
+    
 }
 extension RootViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -85,7 +90,7 @@ extension RootViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-    
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MyMusicTableViewCell
         
         
@@ -105,7 +110,6 @@ extension RootViewController: UITableViewDataSource, UITableViewDelegate {
                     }
                 }
             } else {
-                let network = NetworkProvider()
                 
                 network.getMyTrackImage(link: song.picture_link!) { (data) in
                     self.imageCache.setObject(data as NSData, forKey: song.picture_link! as NSString)
@@ -133,7 +137,13 @@ extension RootViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         
-        let song = mySongs[indexPath.row]
+        if Player != nil, Player.isPlaying == true {
+            Player.stop()
+        }
+        
+        let avkit = WorkWithAVKit()
+        numberSongPlayNow = indexPath.row
+        let song = mySongs[numberSongPlayNow]
         
         infoMusicLabel.text = song.name
         
@@ -162,10 +172,27 @@ extension RootViewController: UITableViewDataSource, UITableViewDelegate {
             }
         }
         
+        
+        network.getMyMusic(link: "https://music.mark99.ru/api/getTrack",
+                           songHash: song.hash) { [weak self] data in
+            avkit.readyPlaySong(songData: data)
+            Player.delegate = self
+            
+            
+            Player.play()
+            DispatchQueue.main.async {
+                self!.playAndPause.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            }
+            
+            
+            
+            
+        }
+        
         return indexPath
     }
     
-
+    
     
     
     
@@ -175,13 +202,164 @@ extension RootViewController: UITableViewDataSource, UITableViewDelegate {
 extension RootViewController {
     
     @IBAction func previousMusic(_ sender: UIButton) {
+        if numberSongPlayNow == 0 {return}
+        if Player != nil, Player.isPlaying == true {
+            Player.stop()
+            DispatchQueue.main.async {
+                self.playAndPause.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            }
+        }
+        numberSongPlayNow -= 1
+        let song = mySongs[numberSongPlayNow]
+        infoMusicLabel.text = song.name
+        
+        if song.picture_link != "" {
+            if let cachedImage = imageCache.object(forKey: song.picture_link! as NSString) {
+                print("cache work!")
+                DispatchQueue.main.async {
+                    self.infoMusicImage.image = UIImage(data: cachedImage as Data)
+                }
+            } else {
+                print("cache don't work")
+                let network = NetworkProvider()
+                
+                network.getMyTrackImage(link: song.picture_link!) { (data) in
+                    self.imageCache.setObject(data as NSData, forKey: song.picture_link! as NSString)
+                    
+                    DispatchQueue.main.async {
+                        self.infoMusicImage.image = UIImage(data: data)
+                    }
+                }
+                
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.infoMusicImage.image = UIImage(systemName: "music.note.list")
+            }
+        }
+        
+        let avkit = WorkWithAVKit()
+        network.getMyMusic(link: "https://music.mark99.ru/api/getTrack",
+                           songHash: song.hash) { [weak self] data in
+            avkit.readyPlaySong(songData: data)
+            Player.delegate = self
+            Player.play()
+            DispatchQueue.main.async {
+                self!.playAndPause.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            }
+        }
+    }
+    
+    @IBAction func pauseAndPlayMusic(_ sender: UIButton) {
+        if Player != nil, Player.isPlaying == true {
+            Player.stop()
+            DispatchQueue.main.async {
+                self.playAndPause.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            }
+        } else if Player == nil{
+            
+            let song = mySongs[self.numberSongPlayNow]
+            
+            infoMusicLabel.text = song.name
+            
+            if song.picture_link != "" {
+                if let cachedImage = imageCache.object(forKey: song.picture_link! as NSString) {
+                    print("cache work!")
+                    DispatchQueue.main.async {
+                        self.infoMusicImage.image = UIImage(data: cachedImage as Data)
+                    }
+                } else {
+                    print("cache don't work")
+                    let network = NetworkProvider()
+                    
+                    network.getMyTrackImage(link: song.picture_link!) { (data) in
+                        self.imageCache.setObject(data as NSData, forKey: song.picture_link! as NSString)
+                        
+                        DispatchQueue.main.async {
+                            self.infoMusicImage.image = UIImage(data: data)
+                        }
+                    }
+                    
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.infoMusicImage.image = UIImage(systemName: "music.note.list")
+                }
+            }
+            
+            let avkit = WorkWithAVKit()
+            network.getMyMusic(link: "https://music.mark99.ru/api/getTrack",
+                               songHash: song.hash) { [weak self] data in
+                avkit.readyPlaySong(songData: data)
+                Player.delegate = self
+                Player.play()
+                DispatchQueue.main.async {
+                    self!.playAndPause.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+                }
+                
+                
+                
+                
+            }
+        } else if Player != nil, Player.isPlaying == false {
+            Player.play()
+            DispatchQueue.main.async {
+                
+                self.playAndPause.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            }
+        }
         
     }
-    @IBAction func pauseAndPlayMusic(_ sender: UIButton) {
-
-    }
     @IBAction func nextMusic(_ sender: UIButton) {
-
+        if Player == nil {
+            numberSongPlayNow = -1
+        }
+        if mySongs.count == numberSongPlayNow + 1 {return}
+        numberSongPlayNow += 1
+        if Player != nil, Player.isPlaying == true {
+            Player.stop()
+            DispatchQueue.main.async {
+                self.playAndPause.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            }
+        }
+        let song = mySongs[numberSongPlayNow]
+        infoMusicLabel.text = song.name
+        
+        if song.picture_link != "" {
+            if let cachedImage = imageCache.object(forKey: song.picture_link! as NSString) {
+                print("cache work!")
+                DispatchQueue.main.async {
+                    self.infoMusicImage.image = UIImage(data: cachedImage as Data)
+                }
+            } else {
+                print("cache don't work")
+                let network = NetworkProvider()
+                
+                network.getMyTrackImage(link: song.picture_link!) { (data) in
+                    self.imageCache.setObject(data as NSData, forKey: song.picture_link! as NSString)
+                    
+                    DispatchQueue.main.async {
+                        self.infoMusicImage.image = UIImage(data: data)
+                    }
+                }
+                
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.infoMusicImage.image = UIImage(systemName: "music.note.list")
+            }
+        }
+        
+        let avkit = WorkWithAVKit()
+        network.getMyMusic(link: "https://music.mark99.ru/api/getTrack",
+                           songHash: song.hash) { [weak self] data in
+            avkit.readyPlaySong(songData: data)
+            Player.delegate = self
+            Player.play()
+            DispatchQueue.main.async {
+                self!.playAndPause.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            }
+        }
     }
     
 }
@@ -190,6 +368,81 @@ extension RootViewController {
 extension RootViewController: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         
+        if mySongs.count == numberSongPlayNow + 1 {return}
+        numberSongPlayNow += 1
+        if Player != nil, Player.isPlaying == true {
+            Player.stop()
+            DispatchQueue.main.async {
+                self.playAndPause.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            }
+        }
+        let song = mySongs[numberSongPlayNow]
+        infoMusicLabel.text = song.name
+        
+        if song.picture_link != "" {
+            if let cachedImage = imageCache.object(forKey: song.picture_link! as NSString) {
+                print("cache work!")
+                DispatchQueue.main.async {
+                    self.infoMusicImage.image = UIImage(data: cachedImage as Data)
+                }
+            } else {
+                print("cache don't work")
+                let network = NetworkProvider()
+                
+                network.getMyTrackImage(link: song.picture_link!) { (data) in
+                    self.imageCache.setObject(data as NSData, forKey: song.picture_link! as NSString)
+                    
+                    DispatchQueue.main.async {
+                        self.infoMusicImage.image = UIImage(data: data)
+                    }
+                }
+                
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.infoMusicImage.image = UIImage(systemName: "music.note.list")
+            }
+        }
+        
+        let avkit = WorkWithAVKit()
+        network.getMyMusic(link: "https://music.mark99.ru/api/getTrack",
+                           songHash: song.hash) { [weak self] data in
+            avkit.readyPlaySong(songData: data)
+            Player.delegate = self
+            Player.play()
+            DispatchQueue.main.async {
+                self!.playAndPause.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            }
+        }
     }
-    
+}
+
+
+extension RootViewController {
+    func setupMediaPlayer() {
+        let commandCenter = MPRemoteCommandCenter.shared()
+        
+        commandCenter.playCommand.addTarget { event in
+            if Player != nil {
+                DispatchQueue.main.async {
+                    self.playAndPause.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+                }
+                Player.play() }
+            
+            return .success
+        }
+        commandCenter.pauseCommand.addTarget { event in
+            Player.pause()
+            DispatchQueue.main.async {
+                self.playAndPause.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            }
+            return .success
+        }
+        commandCenter.nextTrackCommand.addTarget { event in
+            
+            return .success
+           
+        }
+        
+    }
 }

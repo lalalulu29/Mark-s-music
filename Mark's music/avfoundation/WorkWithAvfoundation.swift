@@ -5,25 +5,29 @@
 //  Created by Кирилл Любарских  on 22.04.2021.
 //
 
+import AVKit
 import AVFoundation
-import UIKit
+import MediaPlayer
 
+var Player: AVAudioPlayer!
 
-class WorkWithAVFoundation {
+class WorkWithAVKit {
 
-    private var AVPlayer = AVAudioPlayer()
-    func readyPlaySong(songData: Data) -> AVAudioPlayer? {
+   
+    func readyPlaySong(songData: Data) {
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
-            AVPlayer = try AVAudioPlayer(data: songData)
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
             
-            return AVPlayer
+            Player = try AVAudioPlayer(data: songData)
         } catch {
             print("error")
-            return nil
         }
     }
-    
 
+    
+    
+    
+    
 }
+
